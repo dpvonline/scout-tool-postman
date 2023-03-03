@@ -1,771 +1,1223 @@
 {
-  "info": {
-    "_postman_id": "a6556d86-12e8-49c4-9947-b100e4ce1b11",
-    "name": "ScoutTool",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Login Bundesapp",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "var jsonData = JSON.parse(responseBody);",
-              "pm.environment.set(\"refresh_token\", jsonData.refresh_token);",
-              "pm.environment.set(\"access_token\", jsonData.access_token);",
-              "pm.globals.set(\"refresh_token\", jsonData.refresh_token);",
-              "pm.globals.set(\"access_token\",  jsonData.access_token);",
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "grant_type",
-              "value": "password"
-            },
-            {
-              "key": "client_id",
-              "value": "dpv-tool-dev"
-            },
-            {
-              "key": "password",
-              "value": "****"
-            },
-            {
-              "key": "username",
-              "value": "****"
-            },
-            {
-              "key": "scope",
-              "value": "openid",
-              "type": "default"
-            }
-          ]
-        },
-        "url": {
-          "raw": "https://auth.bundesapp.org/realms/DPV/protocol/openid-connect/token",
-          "protocol": "https",
-          "host": [
-            "auth",
-            "bundesapp",
-            "org"
-          ],
-          "path": [
-            "realms",
-            "DPV",
-            "protocol",
-            "openid-connect",
-            "token"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Login DPV Bieber PROD",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "var jsonData = JSON.parse(responseBody);",
-              "pm.environment.set(\"refresh_token\", jsonData.refresh_token);",
-              "pm.environment.set(\"access_token\", jsonData.access_token);",
-              "pm.globals.set(\"refresh_token\", jsonData.refresh_token);",
-              "pm.globals.set(\"access_token\",  jsonData.access_token);",
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "grant_type",
-              "value": "password"
-            },
-            {
-              "key": "client_id",
-              "value": "digi-bieber"
-            },
-            {
-              "key": "password",
-              "value": "****"
-            },
-            {
-              "key": "username",
-              "value": "****"
-            },
-            {
-              "key": "scope",
-              "value": "openid",
-              "type": "default"
-            }
-          ]
-        },
-        "url": {
-          "raw": "https://auth.dpvonline.de/realms/DPV/protocol/openid-connect/token",
-          "protocol": "https",
-          "host": [
-            "auth",
-            "dpvonline",
-            "de"
-          ],
-          "path": [
-            "realms",
-            "DPV",
-            "protocol",
-            "openid-connect",
-            "token"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Check Password",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"password\": \"****\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/auth/check-password/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "auth",
-            "check-password",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Check Username",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"username\": \"finn\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/auth/check-username/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "auth",
-            "check-username",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Check Email",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"email\": \"robert@hratuga.com\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/auth/check-email/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "auth",
-            "check-email",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Group Members",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"name\":\"Test Group 2\",\n    \"parentId\":\"d68c6b74-5ae6-41c9-bca6-9a65fd4b5516\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/members/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "group",
-            "721c8225-aa62-4cf7-96c1-7d3393368e98",
-            "members",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Personal Data",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"dsgvoConfirmed\": true,\n    \"smsNotification\": true,\n    \"id\": \"65c1f737-a860-4947-b6a3-3a48df385fdf\",\n    \"scoutName\": \"nvhj\",\n    \"firstName\": \"nvhj\",\n    \"lastName\": \"jvnv\",\n    \"address\": \"haus 12\",\n    \"addressSupplement\": \"\",\n    \"scoutGroup\": 352,\n    \"phoneNumber\": \"\",\n    \"email\": \"test@ho.de\",\n    \"bundespost\": \"nothing\",\n    \"birthday\": null,\n    \"gender\": \"N\",\n    \"leader\": \"N\",\n    \"scoutLevel\": \"N\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/auth/personal-data/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "auth",
-            "personal-data",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Group Requests",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "POST",
-        "header": [],
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/requests/f754636c-ade9-43dd-a7c1-3731f773ba08/decline/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "group",
-            "721c8225-aa62-4cf7-96c1-7d3393368e98",
-            "requests",
-            "f754636c-ade9-43dd-a7c1-3731f773ba08",
-            "decline",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Register",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"username\": \"****\",\n    \"password\":\"****\",\n    \"email\": \"test@test.de\",\n    \"mobileNumber\": \"098765645\",\n    \"scoutName\": \"test\",\n    \"dsgvoConfirmed\": true,\n    \"emailNotification\": \"Full\",\n    \"smsNotification\": true,\n    \"firstName\": \"nvhj\",\n    \"lastName\": \"jvnv\",\n    \"address\": \"haus 12\",\n    \"addressSupplement\": \"\",\n    \"zipCode\": \"53113\",\n    \"scoutGroup\": 493,\n    \"bundespost\": \"nothing\",\n    \"birthday\": null,\n    \"gender\": \"N\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/auth/register/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "auth",
-            "register",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get My Groups",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://127.0.0.1:8000/auth/my-groups/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "auth",
-            "my-groups",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get My Members",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://127.0.0.1:8000/auth/my-members/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "auth",
-            "my-members",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Groups",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "body": {
-          "mode": "formdata",
-          "formdata": []
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/group/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "group",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get DPV Vorstand Group",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/group/b2b4d092-c663-42a6-85c9-1ba3c91ed875/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "group",
-            "b2b4d092-c663-42a6-85c9-1ba3c91ed875",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Invite into DPV Vorstand Group",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"user_id\":\"202c417d-6d3b-4b74-83c1-5706303080a3\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/group/b2b4d092-c663-42a6-85c9-1ba3c91ed875/invite/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "group",
-            "b2b4d092-c663-42a6-85c9-1ba3c91ed875",
-            "invite",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Leave DPV Vorstand Group",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "POST",
-        "header": [],
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/group/b2b4d092-c663-42a6-85c9-1ba3c91ed875/leave/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "group",
-            "b2b4d092-c663-42a6-85c9-1ba3c91ed875",
-            "leave",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Kick DPV Vorstand Group",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"user_id\":\"202c417d-6d3b-4b74-83c1-5706303080a3\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/group/b2b4d092-c663-42a6-85c9-1ba3c91ed875/kick/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "group",
-            "b2b4d092-c663-42a6-85c9-1ba3c91ed875",
-            "kick",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Users",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/members/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "members",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Groups count",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "{{access_token}}",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://127.0.0.1:8000/keycloak/statistics/group-count/",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "keycloak",
-            "statistics",
-            "group-count",
-            ""
-          ]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "8155b2ec-97ec-4991-9d48-a9aca136692b",
+		"name": "ScoutTool",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Group",
+			"item": [
+				{
+					"name": "Get All Groups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get DPV Vorstand Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/b2b4d092-c663-42a6-85c9-1ba3c91ed875/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								"b2b4d092-c663-42a6-85c9-1ba3c91ed875",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/my-groups/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"my-groups",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invite into DPV Vorstand Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"202c417d-6d3b-4b74-83c1-5706303080a3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/b2b4d092-c663-42a6-85c9-1ba3c91ed875/invite/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								"b2b4d092-c663-42a6-85c9-1ba3c91ed875",
+								"invite",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leave DPV Vorstand Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/b2b4d092-c663-42a6-85c9-1ba3c91ed875/leave/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								"b2b4d092-c663-42a6-85c9-1ba3c91ed875",
+								"leave",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kick DPV Vorstand Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"202c417d-6d3b-4b74-83c1-5706303080a3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/b2b4d092-c663-42a6-85c9-1ba3c91ed875/kick/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								"b2b4d092-c663-42a6-85c9-1ba3c91ed875",
+								"kick",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Group Members",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Test Group 2\",\n    \"parentId\":\"d68c6b74-5ae6-41c9-bca6-9a65fd4b5516\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/members/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								"721c8225-aa62-4cf7-96c1-7d3393368e98",
+								"members",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Group Requests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/requests/f754636c-ade9-43dd-a7c1-3731f773ba08/decline/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								"721c8225-aa62-4cf7-96c1-7d3393368e98",
+								"requests",
+								"f754636c-ade9-43dd-a7c1-3731f773ba08",
+								"decline",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registration",
+			"item": [
+				{
+					"name": "Check Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"****\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/check-password/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"check-password",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"finn\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/check-username/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"check-username",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Email",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"robert@hratuga.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/check-email/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"check-email",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"****\",\n    \"password\":\"****\",\n    \"email\": \"test@test.de\",\n    \"mobileNumber\": \"098765645\",\n    \"scoutName\": \"test\",\n    \"dsgvoConfirmed\": true,\n    \"emailNotification\": \"Full\",\n    \"smsNotification\": true,\n    \"firstName\": \"nvhj\",\n    \"lastName\": \"jvnv\",\n    \"address\": \"haus 12\",\n    \"addressSupplement\": \"\",\n    \"zipCode\": \"53113\",\n    \"scoutGroup\": 493,\n    \"bundespost\": \"nothing\",\n    \"birthday\": null,\n    \"gender\": \"N\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personal",
+			"item": [
+				{
+					"name": "Notifications",
+					"item": [
+						{
+							"name": "All Notifications",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/all/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"all",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unread Notifications",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/unread/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"unread",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read Notifications",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/read/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"read",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark All as Read",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/mark-as-read/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"mark-as-read",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark Partial as Unread",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ids\":[1,2]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/mark-as-unread/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"mark-as-unread",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark All as Unread",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/mark-as-read/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"mark-as-read",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/delete/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"delete",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Partial",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ids\":[1,2]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/delete/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"delete",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All Count",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/auth/notification/count/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"notification",
+										"count",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Personal Data",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dsgvoConfirmed\": true,\n    \"smsNotification\": true,\n    \"id\": \"65c1f737-a860-4947-b6a3-3a48df385fdf\",\n    \"scoutName\": \"nvhj\",\n    \"firstName\": \"nvhj\",\n    \"lastName\": \"jvnv\",\n    \"address\": \"haus 12\",\n    \"addressSupplement\": \"\",\n    \"scoutGroup\": 352,\n    \"phoneNumber\": \"\",\n    \"email\": \"test@ho.de\",\n    \"bundespost\": \"nothing\",\n    \"birthday\": null,\n    \"gender\": \"N\",\n    \"leader\": \"N\",\n    \"scoutLevel\": \"N\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/personal-data/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"personal-data",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Groups",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/my-groups/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"my-groups",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Members",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/my-members/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"my-members",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login Bundesapp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"refresh_token\", jsonData.refresh_token);",
+							"pm.environment.set(\"access_token\", jsonData.access_token);",
+							"pm.globals.set(\"refresh_token\", jsonData.refresh_token);",
+							"pm.globals.set(\"access_token\",  jsonData.access_token);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "client_id",
+							"value": "dpv-tool-dev"
+						},
+						{
+							"key": "password",
+							"value": "****"
+						},
+						{
+							"key": "username",
+							"value": "****"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://auth.bundesapp.org/realms/DPV/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"auth",
+						"bundesapp",
+						"org"
+					],
+					"path": [
+						"realms",
+						"DPV",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login DPV Bieber PROD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"refresh_token\", jsonData.refresh_token);",
+							"pm.environment.set(\"access_token\", jsonData.access_token);",
+							"pm.globals.set(\"refresh_token\", jsonData.refresh_token);",
+							"pm.globals.set(\"access_token\",  jsonData.access_token);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "client_id",
+							"value": "digi-bieber"
+						},
+						{
+							"key": "password",
+							"value": "****"
+						},
+						{
+							"key": "username",
+							"value": "****"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://auth.dpvonline.de/realms/DPV/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"auth",
+						"dpvonline",
+						"de"
+					],
+					"path": [
+						"realms",
+						"DPV",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/keycloak/members/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"keycloak",
+						"members",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Groups count",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/keycloak/statistics/group-count/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"keycloak",
+						"statistics",
+						"group-count",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }
