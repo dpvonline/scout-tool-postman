@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8155b2ec-97ec-4991-9d48-a9aca136692b",
+		"_postman_id": "7eb28154-aa0d-4a21-966c-e108fc005854",
 		"name": "ScoutTool",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -44,6 +44,46 @@
 								"keycloak",
 								"group",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Groups In Short Syntax",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/groups-short/?search=vorstand",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"groups-short",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "vorstand"
+								}
 							]
 						}
 					},
@@ -1400,6 +1440,308 @@
 								"keycloak",
 								"statistics",
 								"group-count",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AnmeldeTool",
+			"item": [
+				{
+					"name": "Create Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hagis Lager\",\n    \"technicalName\": \"hagis-lager\",\n    \"shortDescription\": \"Das beste Lager überhaupt\",\n    \"longDescription\": \"<p>Das beste Lager überhaupt!!!1!11!</p>\",\n    \"icon\": \"party-popper\",\n    \"startDate\": \"2023-04-28T18:00:00+02:00\",\n    \"endDate\": \"2023-04-30T13:00:00+02:00\",\n    \"registrationDeadline\": \"2023-04-28T01:00:00+02:00\",\n    \"registrationStart\": \"2023-04-21T01:00:00+02:00\",\n    \"lastPossibleUpdate\": \"2023-04-28T17:00:00+02:00\",\n    \"isPublic\": true,\n    \"location\": 6,\n    \"viewGroup\": \"7afe257a-42a0-40f2-8540-ea9613b669db\",\n    \"adminGroup\": \"49beaead-17a9-421b-9fea-ad486d26ef13\",\n    \"invitingGroup\": \"49beaead-17a9-421b-9fea-ad486d26ef13\",\n    \"registrationLevel\": 5,\n    \"theme\": 3,\n    \"emailSet\": 1,\n    \"invitedGroups\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.01:8000/event/event/",
+							"host": [
+								"127",
+								"0",
+								"01"
+							],
+							"port": "8000",
+							"path": [
+								"event",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"6887dca7-cb65-4d42-9036-f681be9d38db\",\n    \"name\": \"Hagis Lager\",\n    \"technicalName\": \"hagis-lager\",\n    \"shortDescription\": \"Das beste Lager überhaupt\",\n    \"longDescription\": \"<p>Das beste Lager überhaupt!!!1!11!</p>\",\n    \"cloudLink\": null,\n    \"eventUrl\": null,\n    \"icon\": \"party-popper\",\n    \"startDate\": \"2023-04-28T18:00:00+02:00\",\n    \"endDate\": \"2023-04-30T13:00:00+02:00\",\n    \"registrationDeadline\": \"2023-04-28T01:00:00+02:00\",\n    \"registrationStart\": \"2023-04-21T01:00:00+02:00\",\n    \"lastPossibleUpdate\": \"2023-04-28T17:00:00+02:00\",\n    \"isPublic\": true,\n    \"location\": 6,\n    \"viewGroup\": \"7afe257a-42a0-40f2-8540-ea9613b669db\",\n    \"adminGroup\": \"db907e7f-077c-4e0a-ac48-a8dc1db57abb\",\n    \"invitingGroup\": \"db907e7f-077c-4e0a-ac48-a8dc1db57abb\",\n    \"registrationLevel\": 5,\n    \"theme\": 3,\n    \"emailSet\": 1,\n    \"invitedGroups\": [\n        \"2fb07c05-a61f-42e8-958d-326474289267\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.01:8000/event/event/6887dca7-cb65-4d42-9036-f681be9d38db/",
+							"host": [
+								"127",
+								"0",
+								"01"
+							],
+							"port": "8000",
+							"path": [
+								"event",
+								"event",
+								"6887dca7-cb65-4d42-9036-f681be9d38db",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.01:8000/event/event/6887dca7-cb65-4d42-9036-f681be9d38db/",
+							"host": [
+								"127",
+								"0",
+								"01"
+							],
+							"port": "8000",
+							"path": [
+								"event",
+								"event",
+								"6887dca7-cb65-4d42-9036-f681be9d38db",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event Location",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.01:8000/event/event-location/",
+							"host": [
+								"127",
+								"0",
+								"01"
+							],
+							"port": "8000",
+							"path": [
+								"event",
+								"event-location",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event Location",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hagis Heim\",\n    \"description\": \"Coolstes Heim ever\",\n    \"address\": \"Meine Adresse 1\",\n    \"contactName\": \"Hagi\",\n    \"contactEmail\": \"test@test.de\",\n    \"contactPhone\": \"\",\n    \"perPersonFee\": null,\n    \"fixFee\": null,\n    \"zipCode\": 7829\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.01:8000/event/event-location/",
+							"host": [
+								"127",
+								"0",
+								"01"
+							],
+							"port": "8000",
+							"path": [
+								"event",
+								"event-location",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Event Invitations",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.01:8000/event/my-invitations/",
+							"host": [
+								"127",
+								"0",
+								"01"
+							],
+							"port": "8000",
+							"path": [
+								"event",
+								"my-invitations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Event Registration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.01:8000/event/my-registrations/",
+							"host": [
+								"127",
+								"0",
+								"01"
+							],
+							"port": "8000",
+							"path": [
+								"event",
+								"my-registrations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event Overview",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.01:8000/event/event-overview/",
+							"host": [
+								"127",
+								"0",
+								"01"
+							],
+							"port": "8000",
+							"path": [
+								"event",
+								"event-overview",
 								""
 							]
 						}
