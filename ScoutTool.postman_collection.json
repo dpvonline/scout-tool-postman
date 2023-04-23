@@ -94,6 +94,9 @@
 				},
 				{
 					"name": "Create Group Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -105,19 +108,14 @@
 								}
 							]
 						},
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"mode": "formdata",
+							"formdata": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/keycloak/group/",
+							"raw": "http://127.0.0.1:8000/keycloak/group/72077a2a-95e6-433d-99f0-03fbef0e37b7/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -129,6 +127,7 @@
 							"path": [
 								"keycloak",
 								"group",
+								"72077a2a-95e6-433d-99f0-03fbef0e37b7",
 								""
 							]
 						}
@@ -422,7 +421,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/inevitable-members/?search=jake",
+							"raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/inevitable-members",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -435,14 +434,7 @@
 								"keycloak",
 								"group",
 								"721c8225-aa62-4cf7-96c1-7d3393368e98",
-								"inevitable-members",
-								""
-							],
-							"query": [
-								{
-									"key": "search",
-									"value": "jake"
-								}
+								"inevitable-members"
 							]
 						}
 					},
@@ -450,6 +442,9 @@
 				},
 				{
 					"name": "Group Kickable Members",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -461,10 +456,19 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"202c417d-6d3b-4b74-83c1-5706303080a3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/requests/f754636c-ade9-43dd-a7c1-3731f773ba08/decline/",
+							"raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/kickable-members/?search=robert",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -477,10 +481,14 @@
 								"keycloak",
 								"group",
 								"721c8225-aa62-4cf7-96c1-7d3393368e98",
-								"requests",
-								"f754636c-ade9-43dd-a7c1-3731f773ba08",
-								"decline",
+								"kickable-members",
 								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "robert"
+								}
 							]
 						}
 					},
