@@ -50,6 +50,92 @@
 					"response": []
 				},
 				{
+					"name": "Create Group",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Cool\",\r\n    \"type\":\"Event\",\r\n    \"parentId\":\"b2b4d092-c663-42a6-85c9-1ba3c91ed875\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Group Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get DPV Vorstand Group",
 					"request": {
 						"auth": {
@@ -319,6 +405,86 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Group Inviteable Members",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/inevitable-members/?search=jake",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								"721c8225-aa62-4cf7-96c1-7d3393368e98",
+								"inevitable-members",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "jake"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Group Kickable Members",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/group/721c8225-aa62-4cf7-96c1-7d3393368e98/requests/f754636c-ade9-43dd-a7c1-3731f773ba08/decline/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"group",
+								"721c8225-aa62-4cf7-96c1-7d3393368e98",
+								"requests",
+								"f754636c-ade9-43dd-a7c1-3731f773ba08",
+								"decline",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -385,7 +551,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"finn\"\n}",
+							"raw": "{\n    \"username\": \"****\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1015,209 +1181,224 @@
 			]
 		},
 		{
-			"name": "Login Bundesapp",
-			"event": [
+			"name": "Login",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"var jsonData = JSON.parse(responseBody);",
-							"pm.environment.set(\"refresh_token\", jsonData.refresh_token);",
-							"pm.environment.set(\"access_token\", jsonData.access_token);",
-							"pm.globals.set(\"refresh_token\", jsonData.refresh_token);",
-							"pm.globals.set(\"access_token\",  jsonData.access_token);",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"name": "Login Bundesapp",
+					"event": [
 						{
-							"key": "grant_type",
-							"value": "password"
-						},
-						{
-							"key": "client_id",
-							"value": "dpv-tool-dev"
-						},
-						{
-							"key": "password",
-							"value": "****"
-						},
-						{
-							"key": "username",
-							"value": "****"
-						},
-						{
-							"key": "scope",
-							"value": "openid",
-							"type": "default"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"refresh_token\", jsonData.refresh_token);",
+									"pm.environment.set(\"access_token\", jsonData.access_token);",
+									"pm.globals.set(\"refresh_token\", jsonData.refresh_token);",
+									"pm.globals.set(\"access_token\",  jsonData.access_token);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				},
-				"url": {
-					"raw": "https://auth.bundesapp.org/realms/DPV/protocol/openid-connect/token",
-					"protocol": "https",
-					"host": [
-						"auth",
-						"bundesapp",
-						"org"
 					],
-					"path": [
-						"realms",
-						"DPV",
-						"protocol",
-						"openid-connect",
-						"token"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login DPV Bieber PROD",
-			"event": [
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								},
+								{
+									"key": "client_id",
+									"value": "dpv-tool-dev"
+								},
+								{
+									"key": "username",
+									"value": "****"
+								},
+								{
+									"key": "password",
+									"value": "****"
+								},
+								{
+									"key": "scope",
+									"value": "openid",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://auth.bundesapp.org/realms/DPV/protocol/openid-connect/token",
+							"protocol": "https",
+							"host": [
+								"auth",
+								"bundesapp",
+								"org"
+							],
+							"path": [
+								"realms",
+								"DPV",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"var jsonData = JSON.parse(responseBody);",
-							"pm.environment.set(\"refresh_token\", jsonData.refresh_token);",
-							"pm.environment.set(\"access_token\", jsonData.access_token);",
-							"pm.globals.set(\"refresh_token\", jsonData.refresh_token);",
-							"pm.globals.set(\"access_token\",  jsonData.access_token);",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"name": "Login DPV Bieber PROD",
+					"event": [
 						{
-							"key": "grant_type",
-							"value": "password"
-						},
-						{
-							"key": "client_id",
-							"value": "digi-bieber"
-						},
-						{
-							"key": "password",
-							"value": "****"
-						},
-						{
-							"key": "username",
-							"value": "****"
-						},
-						{
-							"key": "scope",
-							"value": "openid",
-							"type": "default"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"refresh_token\", jsonData.refresh_token);",
+									"pm.environment.set(\"access_token\", jsonData.access_token);",
+									"pm.globals.set(\"refresh_token\", jsonData.refresh_token);",
+									"pm.globals.set(\"access_token\",  jsonData.access_token);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				},
-				"url": {
-					"raw": "https://auth.dpvonline.de/realms/DPV/protocol/openid-connect/token",
-					"protocol": "https",
-					"host": [
-						"auth",
-						"dpvonline",
-						"de"
 					],
-					"path": [
-						"realms",
-						"DPV",
-						"protocol",
-						"openid-connect",
-						"token"
-					]
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								},
+								{
+									"key": "client_id",
+									"value": "digi-bieber"
+								},
+								{
+									"key": "password",
+									"value": "****"
+								},
+								{
+									"key": "username",
+									"value": "****"
+								},
+								{
+									"key": "scope",
+									"value": "openid",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://auth.dpvonline.de/realms/DPV/protocol/openid-connect/token",
+							"protocol": "https",
+							"host": [
+								"auth",
+								"dpvonline",
+								"de"
+							],
+							"path": [
+								"realms",
+								"DPV",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Get All Users",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{access_token}}",
-							"type": "string"
+			"name": "Members",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/members/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"members",
+								""
+							]
 						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/keycloak/members/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"keycloak",
-						"members",
-						""
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Get Groups count",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{access_token}}",
-							"type": "string"
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "Get Groups count",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/keycloak/statistics/group-count/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"keycloak",
+								"statistics",
+								"group-count",
+								""
+							]
 						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/keycloak/statistics/group-count/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"keycloak",
-						"statistics",
-						"group-count",
-						""
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
